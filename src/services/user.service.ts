@@ -27,11 +27,11 @@ export const getAllUsers = async (options: QueryOptions) => {
     const total = await User.countDocuments(query);
 
     return {
-        data: users,
         total,
         page,
         limit,
         totalPages: Math.ceil(total / limit),
+        data: users,
     };
 };
 

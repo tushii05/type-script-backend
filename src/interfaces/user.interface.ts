@@ -8,5 +8,6 @@ export interface IUser {
 }
 
 export interface IUserPayload {
-    id: string;
+  id: string;
+  role: "user" | "admin"; 
 }
