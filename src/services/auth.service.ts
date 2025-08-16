@@ -35,10 +35,12 @@ export const loginUser = async (email: string, password: string): Promise<string
 };
 
 
-const generateToken = (id: string, role: string): string => {
+const generateToken = (id: string, role: string): { token: string; role: string } => {
     if (!process.env.JWT_SECRET) {
         throw new Error("JWT_SECRET not set in .env");
     }
 
-    return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    return { token, role };
 };
+
