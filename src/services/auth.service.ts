@@ -20,7 +20,7 @@ export const registerUser = async (
     const user = new User({ name, email, password: hashedPassword, role });
 
     await user.save();
-    return generateToken(user._id.toString(), user.role);
+    return generateToken(String(user._id), user.role);
 };
 
 
@@ -31,7 +31,7 @@ export const loginUser = async (email: string, password: string): Promise<string
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error("Invalid credentials");
 
-    return generateToken(user._id.toString(), user.role);
+    return generateToken(String(user._id), user.role);
 };
 
 
